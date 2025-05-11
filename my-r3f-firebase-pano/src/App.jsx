@@ -60,9 +60,9 @@ function App() {
 
     return (
         <div className="App">
-            <header className="App-header">
+            {/* <header className="App-header">
                 <h1>Vista Panorámica con R3F (Prueba Local)</h1>
-            </header>
+            </header> */}
             <div className="canvas-container">
                 {imageUrl ? (
                     <Canvas camera={{ fov: 60, position: [0, 0, 0.1] }}> {/* Disminuimos el FOV para una vista con más "zoom" */}

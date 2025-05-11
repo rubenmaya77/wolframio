@@ -1,0 +1,25 @@
+/* src/components/PropertyList.css */
+.property-list-container {
+  padding: 20px;
+  background-color: #f4f4f4; /* Un fondo ligeramente diferente para esta sección */
+  text-align: center;
+}
+
+.property-list-container h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.property-list {
+  display: flex;
+  flex-wrap: wrap; /* Permite que las cards pasen a la siguiente línea */
+  justify-content: center; /* Centra las cards */
+  gap: 10px; /* Espacio entre cards */
+}
+
+.property-list-loading,
+.property-list-error {
+  font-size: 1.2em;
+  padding: 20px;
+  color: #555;
+}

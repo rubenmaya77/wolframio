@@ -1,41 +1,40 @@
 /* src/App.css */
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #282c34;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
 
 .App {
-  text-align: center;
   display: flex;
-  flex-direction: column;
-  flex-grow: 1;
+  flex-direction: column; /* Apila los hijos verticalmente (header, canvas-container) */
+  height: 100%; /* Ocupa toda la altura del viewport (definida por html, body, #root) */
+  text-align: center;
 }
 
 .App-header {
-  background-color: #282c34;
-  padding: 20px;
+  background-color: #282c34; /* Color de ejemplo, puedes cambiarlo */
+  padding: 15px; /* Un poco menos de padding */
   color: white;
+  flex-shrink: 0; /* Evita que el header se encoja si el contenido del canvas es muy grande */
+  font-size: calc(8px + 2vmin); /* Ajusta el tamaño de la fuente */
 }
 
 .canvas-container {
-  width: 100%;
-  flex-grow: 1; /* Ocupa el espacio restante */
-  min-height: 500px; /* Altura mínima para el canvas */
+  flex-grow: 1; /* Hace que este contenedor ocupe todo el espacio vertical restante */
+  width: 100%;   /* Ocupa todo el ancho disponible */
+  position: relative; /* Importante para el posicionamiento interno del canvas */
+  background-color: #111; /* Un color de fondo oscuro para el área del canvas */
 }
 
-.loading-screen, .error-screen, .no-image {
+/* El componente Canvas de R3F se adaptará automáticamente al tamaño de su contenedor padre (.canvas-container) */
+
+.loading-screen,
+.error-screen,
+.no-image {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  font-size: 1.5rem;
+  height: 100%; /* Para que estos mensajes también ocupen el espacio del canvas-container */
+  font-size: 1.5em;
+  color: #ccc; /* Un color más suave para los mensajes */
+}
+
+.error-screen {
+  color: #ff6b6b; /* Un rojo más distintivo para errores */
 }

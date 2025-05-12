@@ -14,6 +14,10 @@ function Layout() {
           <li>
             <Link to="/panorama">Vista Panorámica</Link>
           </li>
+          <li>
+            <Link to="/mapa">Ver Mapa</Link>
+          </li>
+
           {/* Puedes añadir más enlaces aquí */}
         </ul>
       </nav>

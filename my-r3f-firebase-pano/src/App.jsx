@@ -1,53 +1,45 @@
 // src/App.jsx
 import React, { useState, useEffect, Suspense } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from './firebase-config';
-import PanoramaSphere from './components/PanoramaSphere'; // Importa el componente PanoramaSphere como default
+// import { Canvas } from '@react-three/fiber'; // Ya no se usa directamente aquí
+// import { OrbitControls } from '@react-three/drei'; // Ya no se usa directamente aquí
+// import { doc, getDoc } from 'firebase/firestore'; // Descomentar si se carga desde Firebase
+// import { db } from './firebase-config'; // Descomentar si se carga desde Firebase
+import PanoramaDisplay from './components/PanoramaDisplay'; // Usamos el nuevo componente
 
 import './App.css'; // Estilos básicos para el canvas
 
 function App() {
-    // Para probar con una imagen local:
-    const [imageUrl, setImageUrl] = useState('/mi-panorama.jpeg'); // <-- CAMBIA 'mi-panorama.jpg' por el nombre de tu archivo en la carpeta public
-    const [loading, setLoading] = useState(false); // <-- Empezamos sin cargar, ya que la imagen es local
+    // Lógica para obtener la imageUrl para la vista panorámica principal (/panorama)
+    // Puede ser una URL fija, cargada de un documento específico de Firebase, etc.
+    const [mainPanoramaUrl, setMainPanoramaUrl] = useState('/mi-panorama.jpeg'); // Ejemplo de imagen local por defecto
+    const [loading, setLoading] = useState(false); // Ajustar si se carga de Firebase
     const [error, setError] = useState(null);
 
-    // Define aquí el ID del documento y el nombre de la colección
     // const documentId = 'p29jykBRILenW8GuN2lC';
     // const collectionName = 'properties'; 
 
     /*
     // Comentamos temporalmente la carga desde Firebase
     useEffect(() => {
-        const fetchImageData = async () => {
+        const fetchMainPanoramaData = async () => {
             try {
                 setLoading(true);
                 setError(null);
-                const docRef = doc(db, collectionName, documentId);
-                const docSnap = await getDoc(docRef);
-
-                if (docSnap.exists()) {
-                    const data = docSnap.data();
-                    if (data.imageUrl) {
-                        setImageUrl(data.imageUrl);
-                    } else {
-                        setError("El documento no contiene una 'imageUrl'.");
-                    }
-                } else {
-                    setError("El documento no existe.");
-                }
+                // Lógica para cargar la URL de la panorámica principal desde Firebase
+                // Ejemplo: const docRef = doc(db, 'generalSettings', 'mainPanorama');
+                // const docSnap = await getDoc(docRef);
+                // if (docSnap.exists() && docSnap.data().url) {
+                //     setMainPanoramaUrl(docSnap.data().url);
+                // } else { setError("Panorámica principal no encontrada."); }
             } catch (err) {
-                console.error("Error al obtener el documento:", err);
-                setError("Error al cargar los datos de Firebase.");
+                console.error("Error al cargar panorámica principal:", err);
+                setError("Error al cargar la panorámica principal.");
             } finally {
                 setLoading(false);
             }
         };
-
-        fetchImageData();
-    }, [documentId, collectionName]); // Dependencias para re-ejecutar si cambian
+        // fetchMainPanoramaData();
+    }, []);
     */
 
     if (loading) {
@@ -59,25 +51,12 @@ function App() {
     }
 
     return (
-        <div className="App">
-            {/* <header className="App-header">
-                <h1>Vista Panorámica con R3F (Prueba Local)</h1>
-            </header> */}
+        <div className="App"> {/* Este div App y canvas-container son para la página /panorama */}
             <div className="canvas-container">
-                {imageUrl ? (
-                    <Canvas camera={{ fov: 60, position: [0, 0, 0.1] }}> {/* Disminuimos el FOV para una vista con más "zoom" */}
-                        <Suspense fallback={null}> {/* Suspense para la carga de la textura */}
-                            <PanoramaSphere imageUrl={imageUrl} />
-                        </Suspense>
-                        {/* OrbitControls para mover la cámara alrededor y ver el panorama */}
-                        <OrbitControls enableZoom={false} enablePan={false} />
-                    </Canvas>
-                ) : (
-                    <div className="no-image">No hay imagen panorámica para mostrar.</div>
-                )}
+                {/* El componente PanoramaDisplay se encarga del Canvas y sus contenidos */}
+                <PanoramaDisplay imageUrl={mainPanoramaUrl} />
             </div>
         </div>
     );
 }
-
 export default App;

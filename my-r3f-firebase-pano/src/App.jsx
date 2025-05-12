@@ -4,6 +4,7 @@ import React, { useState, useEffect, Suspense } from 'react';
 // import { OrbitControls } from '@react-three/drei'; // Ya no se usa directamente aquí
 // import { doc, getDoc } from 'firebase/firestore'; // Descomentar si se carga desde Firebase
 // import { db } from './firebase-config'; // Descomentar si se carga desde Firebase
+import ErrorBoundary from './components/ErrorBoundary'; // Importa el ErrorBoundary
 import PanoramaDisplay from './components/PanoramaDisplay'; // Usamos el nuevo componente
 
 import './App.css'; // Estilos básicos para el canvas
@@ -54,7 +55,9 @@ function App() {
         <div className="App"> {/* Este div App y canvas-container son para la página /panorama */}
             <div className="canvas-container">
                 {/* El componente PanoramaDisplay se encarga del Canvas y sus contenidos */}
-                <PanoramaDisplay imageUrl={mainPanoramaUrl} />
+                <ErrorBoundary>
+                  <PanoramaDisplay imageUrl={mainPanoramaUrl} />
+                </ErrorBoundary>
             </div>
         </div>
     );

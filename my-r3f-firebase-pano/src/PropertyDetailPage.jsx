@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from './firebase-config'; // Asegúrate que la ruta es correcta
+import PanoramaDisplay from './components/PanoramaDisplay'; // Importamos el componente de panorámica
 import './PropertyDetailPage.css'; // Crearemos este archivo CSS
 
 function PropertyDetailPage() {
@@ -49,15 +50,18 @@ function PropertyDetailPage() {
     return <div className="property-detail-info">No se encontró información para esta propiedad o la propiedad no existe.</div>;
   }
 
+ 
+  // Establecemos la URL de la panorámica directamente a '/mi-panorama.jpeg'
+  const propertyPanoramaUrl = '/mi-panorama.jpeg';
+
   return (
     <div className="property-detail-page">
       <header className="property-detail-header">
         <h1>{property?.title || 'Detalle de Propiedad'}</h1>
       </header>
       <div className="property-detail-content">
-        <div className="property-detail-image-large-placeholder">
-          {/* Si tuvieras una property.imageUrl, la mostrarías aquí */}
-          <span>Espacio para imagen grande de la propiedad</span>
+        <div className="property-detail-image-large-placeholder"> {/* Mantenemos este div para los estilos de tamaño */}
+          <PanoramaDisplay imageUrl={propertyPanoramaUrl} />
         </div>
         <div className="property-detail-info">
           <h2>{property?.title || 'Título no disponible'}</h2>

@@ -5,7 +5,8 @@ import './index.css'
 import Layout from './Layout.jsx';
 import App from './App.jsx'; // Tu componente de Panorama
 import PropertyPage from './PropertyPage.jsx' 
-import PropertyDetailPage from './PropertyDetailPage.jsx'
+import PropertyDetailPage from './PropertyDetailPage.jsx';
+import MapPage from './MapPage.jsx'; // Importamos la nueva página del mapa
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -16,6 +17,7 @@ createRoot(document.getElementById('root')).render(
           <Route index element={<PropertyPage />} /> {/* Página principal de propiedades */}
           <Route path="property/:propertyId" element={<PropertyDetailPage />} />
           <Route path="panorama" element={<App />} /> {/* Tu página de panorama */}
+          <Route path="mapa" element={<MapPage />} /> {/* Nueva ruta para el mapa */}
           {/* Puedes añadir una ruta para "Not Found" aquí */}
           {/* <Route path="*" element={<NotFoundPage />} /> */}
         </Route>

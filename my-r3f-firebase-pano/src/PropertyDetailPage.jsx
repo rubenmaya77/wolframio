@@ -74,7 +74,7 @@ function PropertyDetailPage() {
       </header>
       <div className="property-detail-content">
         <div className="property-detail-image-large-placeholder"> {/* Mantenemos este div para los estilos de tamaño */}
-        <ErrorBoundary>
+         <ErrorBoundary>
             <PanoramaDisplay imageUrl={currentPanoramaUrl} />
           </ErrorBoundary>
         </div>

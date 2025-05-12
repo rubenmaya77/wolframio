@@ -1,0 +1,33 @@
+/* src/MapPage.css */
+.map-page-container {
+  padding: 20px;
+  text-align: center;
+}
+
+.map-page-title {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.map-responsive-container {
+  overflow: hidden;
+  padding-bottom: 56.25%; /* Proporción 16:9 para el iframe */
+  position: relative;
+  height: 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.map-responsive-container iframe {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.map-page-info {
+  margin-top: 20px;
+  font-size: 0.9em;
+  color: #666;
+}
